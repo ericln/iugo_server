@@ -1,9 +1,8 @@
 import bodyParser from 'body-parser';
-import errorHandler from 'errorhandler';
 import express from 'express';
 import morgan from 'morgan';
 import config from './lib/config';
-
+import errohandling from './lib/middleware/errorHanding';
 import timestampController from './controllers/timestamp';
 import transactionController from './controllers/transaction';
 import transactionStatsController from './controllers/transactionStats';
@@ -23,6 +22,7 @@ app.use('/LeaderboardGet', leaderboardController);
 app.use('/UserSave', userDataController);
 app.use('/UserLoad', userLoadController);
 
+app.use(errohandling.expressErrorHandler);
 
 
 app.listen(config.port);
