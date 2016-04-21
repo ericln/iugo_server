@@ -37,7 +37,6 @@ class LeaderboardService {
 
         return {
           UserId: score.userId,
-          LeaderboardId: score.leaderboardId,
           Score: score.score,
           Rank: rank
         }
