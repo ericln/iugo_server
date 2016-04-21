@@ -11,6 +11,7 @@ class TransactionService {
    * @param payload transaction request payload
    * @param done completed callback function
    */
+
   createTransaction(payload, done) {
 
     async.waterfall([
@@ -38,7 +39,7 @@ class TransactionService {
       payload.Verifier
     );
 
-    if(!isValidTransaction) {
+    if (!isValidTransaction) {
       return done(true, false);
     }
 
@@ -55,7 +56,7 @@ class TransactionService {
       userTransaction.transactions, {transactionId: payload.TransactionId}
     );
 
-    if(exist) {
+    if (exist) {
       return done(null, false);
     }
 
@@ -63,7 +64,7 @@ class TransactionService {
       payload.UserId,
       newTransaction,
       (err, result) => {
-        if(err) {
+        if (err) {
           return done(err);
         }
 
