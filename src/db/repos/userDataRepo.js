@@ -1,6 +1,10 @@
 import async from 'async';
 import db from '../index';
 
+function getUserData(userId, done) {
+  db.UserData.findOne({userId}, done);
+}
+
 function updateUserData(userId, data, done) {
   let updateData = _generateSetObject(data);
 
@@ -28,5 +32,6 @@ function _generateSetObject(data) {
 }
 
 export default {
-  updateUserData
+  updateUserData,
+  getUserData
 }

@@ -1,6 +1,7 @@
 import async from 'async';
 import _ from 'lodash';
 import userDataRepo from '../db/repos/userDataRepo';
+import objectCleaner from '../helper/objectCleaner';
 
 class UserService {
 
@@ -13,6 +14,18 @@ class UserService {
       done(null, {
         Success: true
       })
+    });
+  }
+
+  getUserData(userId, done) {
+    userDataRepo.getUserData(userId, (err, userData) => {
+      if(err) return done(err);
+
+      if(userData) {
+        return done(null, userData.data);
+      }
+
+      done(null, {});
     });
   }
 }

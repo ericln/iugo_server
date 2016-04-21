@@ -10,6 +10,7 @@ import transactionStatsController from './controllers/transactionStats';
 import scoreController from './controllers/scores';
 import leaderboardController from './controllers/leaderboard';
 import userDataController from './controllers/userData';
+import userLoadController from './controllers/userLoad';
 
 let app = express();
 app.use(bodyParser.json());
@@ -20,6 +21,7 @@ app.use('/TransactionStats', transactionStatsController);
 app.use('/ScorePost', scoreController);
 app.use('/LeaderboardGet', leaderboardController);
 app.use('/UserSave', userDataController);
+app.use('/UserLoad', userLoadController);
 
 
 
