@@ -8,7 +8,6 @@ function recordUserScore(req, res, next) {
   let payload = req.body;
 
   scoreService.recordUserScore(payload, (err, result) => {
-
     if(err) {
       return next(err);
     }
