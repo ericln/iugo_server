@@ -1,5 +1,5 @@
 import express from 'express';
-import DateTimeService from '../../services/dateTimeService';
+import DateTimeService from '../../services/DateTimeService';
 
 let router = express.Router();
 
