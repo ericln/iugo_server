@@ -36,7 +36,7 @@ function getRank(userId, leaderboardId, done) {
   async.waterfall(
     [
       (callback) => getUserLeaderboardScore(userId, leaderboardId, callback),
-      (userScore, callback) => _getUserScoreAndRank(userScore, userId, leaderboardId, callback)
+      (userScore, callback) => _getUserScoreAndRank(userScore, leaderboardId, callback)
     ],
     (err, result) => {
       if (err) {
@@ -48,7 +48,7 @@ function getRank(userId, leaderboardId, done) {
   )
 }
 
-function _getUserScoreAndRank(userScore, userId, leaderboardId,  done) {
+function _getUserScoreAndRank(userScore, leaderboardId,  done) {
   db.UserScore.count(
     {
       leaderboardId: leaderboardId,
