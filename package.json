@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node src/app.js",
+    "server-start": "forever start -c \"babel-node\" src/app.js",
+    "server-stop": "forever stop src/app.js",
+    "server-list": "forever list",
     "test": "mocha --compilers js:babel-core/register --recursive"
   },
   "repository": {
