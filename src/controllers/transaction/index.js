@@ -6,10 +6,9 @@ let router = express.Router();
 function createTransaction(req, res, next) {
   let transactionService = new TransactionService();
 
-  let key = req.headers['app-key'];
   let payload = req.body;
 
-  transactionService.createTransaction(key, payload, (err, result) => {
+  transactionService.createTransaction(payload, (err, result) => {
 
     if(err) {
       return next(err);

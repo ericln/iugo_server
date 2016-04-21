@@ -2,16 +2,13 @@ import crypto from 'crypto';
 
 const HashAlgorithm = 'sha1';
 const OutDigest = 'hex';
+const Key = 'NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz';
 
 function validateTransaction(
-  key, transactionId, userId, currencyAmount, verifier
+  transactionId, userId, currencyAmount, verifier
 ) {
-  let text = `${key}${transactionId}${userId}${currencyAmount}`;
+  let text = `${Key}${transactionId}${userId}${currencyAmount}`;
   let hash = crypto.createHash(HashAlgorithm).update(text).digest(OutDigest);
-  console.log({
-    hash,
-    verifier
-  });
   return verifier === hash;
 }
 
