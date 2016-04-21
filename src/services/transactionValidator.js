@@ -8,10 +8,6 @@ function validateTransaction(
 ) {
   let text = `${key}${transactionId}${userId}${currencyAmount}`;
   let hash = crypto.createHash(HashAlgorithm).update(text).digest(OutDigest);
-  console.log({
-    hash,
-    verifier
-  });
   return verifier === hash;
 }
 
