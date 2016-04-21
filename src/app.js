@@ -7,6 +7,7 @@ import config from './lib/config';
 import timestampController from './controllers/timestamp';
 import transactionController from './controllers/transaction';
 import transactionStatsController from './controllers/transactionStats';
+import scoreController from './controllers/scores';
 
 let app = express();
 app.use(bodyParser.json());
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use('/Timestamp', timestampController);
 app.use('/Transaction', transactionController);
 app.use('/TransactionStats', transactionStatsController);
+app.use('/ScorePost', scoreController);
 
 
 app.listen(config.port);

@@ -3,6 +3,7 @@ import logger from '../lib/logger';
 import config from '../lib/config';
 
 import userTransaction from './userTransaction';
+import userScore from './userScore';
 
 let mongoUrl = config.mongoUrl;
 let attemptCount = 0;
@@ -45,5 +46,6 @@ function connect(done) {
 connectWithRetry();
 
 export default {
-  UserTransaction: userTransaction
+  UserTransaction: userTransaction,
+  UserScore: userScore
 }
