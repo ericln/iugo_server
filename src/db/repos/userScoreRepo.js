@@ -1,6 +1,18 @@
 import async from 'async';
 import db from '../index';
 
+function topScores(leaderboardId, offset, limit, done) {
+  db.UserScore.aggregate(
+    [
+      {$match: {leaderboardId: leaderboardId}},
+      {$sort: {score: -1}},
+      {$skip: offset},
+      {$limit: limit}
+    ],
+    done
+  )
+}
+
 function getUserLeaderboardScore(userId, leaderboardId, done) {
   db.UserScore.findOneAndUpdate(
     {userId: userId, leaderboardId: leaderboardId},
@@ -56,5 +68,6 @@ function _getUserScoreAndRank(userScore, userId, leaderboardId,  done) {
 export default {
   getUserLeaderboardScore,
   updateUserScore,
-  getRank
+  getRank,
+  topScores
 }
