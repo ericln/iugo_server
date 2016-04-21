@@ -29,7 +29,17 @@ function addTransactionToUser(userId, transaction, done) {
   )
 }
 
+function getTransactionStats(userId, done) {
+  db.UserTransaction.aggregate(
+    [
+      {}
+    ]
+    , done
+  )
+}
+
 export default {
   getUserTransaction,
-  addTransactionToUser
+  addTransactionToUser,
+  getTransactionStats
 }

@@ -5,13 +5,27 @@ import userTransactionRepo from '../db/repos/userTransactionRepo';
 
 class TransactionService {
 
+  getUserTransactionStats(userId, done) {
+
+    userTransactionRepo.getUserTransaction(userId, (err, userTransaction) => {
+      let transactionCount = userTransaction.transactions.length;
+      let currencySum = _.sumBy(userTransaction.transactions, 'currencyAmount');
+
+      done(null, {
+        UserId: userId,
+        TransactionCount: transactionCount,
+        CurrencySum: currencySum
+      })
+    });
+  }
+
+
   /**
    * Create a new transaction for the user if it is not already existed.
    * @param key secret key
    * @param payload transaction request payload
    * @param done completed callback function
    */
-
   createTransaction(payload, done) {
 
     async.waterfall([

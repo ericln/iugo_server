@@ -6,12 +6,15 @@ import config from './lib/config';
 
 import timestampController from './controllers/timestamp';
 import transactionController from './controllers/transaction';
+import transactionStatsController from './controllers/transactionStats';
 
 let app = express();
 app.use(bodyParser.json());
 
 app.use('/Timestamp', timestampController);
 app.use('/Transaction', transactionController);
+app.use('/TransactionStats', transactionStatsController);
+
 
 app.listen(config.port);
 
