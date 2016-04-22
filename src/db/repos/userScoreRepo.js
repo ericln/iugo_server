@@ -1,6 +1,13 @@
 import async from 'async';
 import db from '../index';
 
+/**
+ * Get paged top scores for a leaderboard
+ * @param leaderboardId leaderboard identifer
+ * @param offset number of scores to skip
+ * @param limit number of scores per page
+ * @param done completed callback
+ */
 function topScores(leaderboardId, offset, limit, done) {
   db.UserScore.aggregate(
     [
@@ -13,6 +20,12 @@ function topScores(leaderboardId, offset, limit, done) {
   )
 }
 
+/**
+ * Get user's current leaderboard score
+ * @param userId user identifier
+ * @param leaderboardId leaderboard identifier
+ * @param done completed callback
+ */
 function getUserLeaderboardScore(userId, leaderboardId, done) {
   db.UserScore.findOneAndUpdate(
     {userId: userId, leaderboardId: leaderboardId},
@@ -22,6 +35,9 @@ function getUserLeaderboardScore(userId, leaderboardId, done) {
   );
 }
 
+/**
+ * update a user's leader board score
+ */
 function updateUserScore(userId, leaderboardId, score, done) {
   db.UserScore.update(
     {userId: userId, leaderboardId: leaderboardId},
@@ -31,6 +47,12 @@ function updateUserScore(userId, leaderboardId, score, done) {
   )
 }
 
+/**
+ * get the user's rank for the given leaderboard
+ * @param userId user identifier
+ * @param leaderboardId leaderboard identifier
+ * @param done completed callback
+ */
 function getRank(userId, leaderboardId, done) {
 
   async.waterfall(
@@ -49,16 +71,6 @@ function getRank(userId, leaderboardId, done) {
 }
 
 function _getUserScoreAndRank(userScore, leaderboardId,  done) {
-  //db.UserScore.aggregate(
-  //  [
-  //    {$match: {leaderboardId: leaderboardId}},
-  //    {$sort: {score: -1, userId: 1}},
-  //    {$skip: offset},
-  //    {$limit: limit}
-  //  ]
-  //)
-
-
   db.UserScore.count(
     {
       leaderboardId: leaderboardId,
