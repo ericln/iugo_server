@@ -5,7 +5,7 @@ function topScores(leaderboardId, offset, limit, done) {
   db.UserScore.aggregate(
     [
       {$match: {leaderboardId: leaderboardId}},
-      {$sort: {score: -1}},
+      {$sort: {score: -1, userId: 1}},
       {$skip: offset},
       {$limit: limit}
     ],
@@ -49,6 +49,16 @@ function getRank(userId, leaderboardId, done) {
 }
 
 function _getUserScoreAndRank(userScore, leaderboardId,  done) {
+  //db.UserScore.aggregate(
+  //  [
+  //    {$match: {leaderboardId: leaderboardId}},
+  //    {$sort: {score: -1, userId: 1}},
+  //    {$skip: offset},
+  //    {$limit: limit}
+  //  ]
+  //)
+
+
   db.UserScore.count(
     {
       leaderboardId: leaderboardId,
