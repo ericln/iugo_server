@@ -28,4 +28,81 @@ when a new user score is recorded (doesn't seem like a good idea).
 - More unit test
 
 
+## Curl Api Test
 
+
+### Timestamp
+curl -X GET -H "Accept: application/json" -H "app-key: NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz" 'http://159.203.222.174:8001/Timestamp'
+
+### Transaction Recording
+curl -X POST -H "Content-Type: application/json" -H "app-key: NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz" -d '{
+    "TransactionId": 1,
+    "UserId": 2,
+    "CurrencyAmount": 3,
+    "Verifier": "fd6b91387c2853ac8467bb4d90eac30897777fc6"
+}
+
+' 'http://159.203.222.174:8001/Transaction'
+
+### Transaction Data Querying
+curl -X POST -H "Content-Type: application/json" -H "app-key: NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz" -d '{
+    "UserId": 2
+}
+
+' 'http://159.203.222.174:8001/TransactionStats'
+
+
+### Leaderboard Score Posting
+curl -X POST -H "Content-Type: application/json" -H "app-key: NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz" -d '{
+    "UserId": 8,
+    "LeaderboardId": 1001,
+    "Score": 18982
+}
+
+' 'http://159.203.222.174:8001/ScorePost'
+
+### Leaderboard Get
+curl -X POST -H "Content-Type: application/json" -H "app-key: NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz" -d '{
+    "UserId": 2,
+    "LeaderboardId": 1001,
+    "Offset": 0,
+    "Limit": 5
+}
+
+' 'http://159.203.222.174:8001/LeaderboardGet'
+
+### User Save
+
+curl -X POST -H "Content-Type: application/json" -H "app-key: NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz" -d '{
+    "UserId": 1,
+    "Data": {
+        "Piece1": {
+            "SubData": 1234,
+            "SubData2": "abcd"
+        },
+        "Piece2": {
+            "SubData": {
+                "SubSubData": 5678
+            }
+        }
+    }
+}' 'http://159.203.222.174:8001/UserSave'
+
+curl -X POST -H "Content-Type: application/json" -H "app-key: NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz" -d '{
+    "UserId": 1,
+    "Data": {
+        "Piece2": {
+            "SubData": {
+                "SubSubData": 9999
+            }
+        }
+    }
+}' 'http://159.203.222.174:8001/UserSave'
+
+### Load User Data
+
+curl -X POST -H "Content-Type: application/json" -H "app-key: NwvprhfBkGuPJnjJp77UPJWJUpgC7mLz" -d '{
+    "UserId": 1
+}
+
+' 'http://159.203.222.174:8001/UserLoad'
