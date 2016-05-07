@@ -9,6 +9,7 @@ if [[ -d ~/kubernetes ]]; then
   echo "Kubernetes already installed"
   exit 0
 else
+  mkdir ~/kubernetes
   echo "Installing Kubernetes..."
 fi
 
