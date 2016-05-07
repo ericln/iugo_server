@@ -32,7 +32,6 @@ deployment:
       - docker tag quay.io/line_eric/iugo_server:latest quay.io/line_eric/iugo_server:$CIRCLE_SHA1
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REG
       - docker push quay.io/line_eric/iugo_server
-      - ./k8s/deploy.sh dev tuition $CIRCLE_SHA1
       - kubectl get nodes
   release:
       branch: /release-.*/
