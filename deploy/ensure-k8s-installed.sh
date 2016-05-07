@@ -10,6 +10,7 @@ if [[ -d ~/kubernetes ]]; then
   exit 0
 else
   mkdir ~/kubernetes
+  mkdir ~/.kube
   echo "Installing Kubernetes..."
 fi
 
