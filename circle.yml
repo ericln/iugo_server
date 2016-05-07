@@ -8,7 +8,7 @@ dependencies:
   cache_directories:
     - ~/kubernetes
   pre:
-    - ./ensure-k8s-installed.sh
+    - ./deploy/ensure-k8s-installed.sh
     - docker build -t $EXTERNAL_REGISTRY_ENDPOINT/hello:$CIRCLE_SHA1 .
 
 test:
