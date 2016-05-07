@@ -23,7 +23,7 @@ deployment:
     commands:
       - docker build -t quay.io/line_eric/iugo_server .
       - docker tag quay.io/line_eric/iugo_server:latest quay.io/line_eric/iugo_server:$CIRCLE_SHA1
-      - docker login $DOCKER_REG -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REG
       - docker push quay.io/line_eric/iugo_server
   release:
       branch: /release-.*/
