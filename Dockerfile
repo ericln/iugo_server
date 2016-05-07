@@ -12,4 +12,4 @@ WORKDIR /opt/iugo/iugo_server
 RUN rm -rf node_modules
 RUN npm install
 
-CMD ["npm", "start"]git 
+CMD ["npm", "start"]git

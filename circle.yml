@@ -1,0 +1,36 @@
+machine:
+  node:
+    version: 6.0.0
+  services:
+    - docker
+
+test:
+  override:
+    - npm test
+
+deployment:
+  hubdev:
+    branch: dev
+    commands:
+      - docker build -t leportlabs/sistuition .
+      - docker tag leportlabs/sistuition:latest leportlabs/sistuition:$CIRCLE_SHA1
+      - docker tag leportlabs/sistuition:latest leportlabs/sistuition:latestdev
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push leportlabs/sistuition
+      - ./k8s/deploy.sh dev tuition $CIRCLE_SHA1
+  hubmaster:
+    branch: master
+    commands:
+      - docker build -t quay.io/line_eric/iugo_server .
+      - docker tag quay.io/line_eric/iugo_server:latest quay.io/line_eric/iugo_server:$CIRCLE_SHA1
+      - docker login $DOCKER_REG -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push quay.io/line_eric/iugo_server
+  release:
+      branch: /release-.*/
+      commands:
+      - docker build -t leportlabs/sistuition .
+      - docker tag leportlabs/sistuition:latest leportlabs/sistuition:$CIRCLE_SHA1
+      - docker tag leportlabs/sistuition:latest leportlabs/sistuition:latestrelease
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push leportlabs/sistuition
+      - ./k8s/deploy.sh stag tuition $CIRCLE_SHA1
