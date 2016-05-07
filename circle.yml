@@ -5,8 +5,8 @@ machine:
     - docker
 
 dependencies:
-  cache_directories:
-    - ~/kubernetes
+  #cache_directories:
+  #  - ~/kubernetes
   pre:
     - ./deploy/ensure-k8s-installed.sh
 
